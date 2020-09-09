@@ -24,6 +24,6 @@ fi
 echo unset AWS_DEFAULT_REGION AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID\;
 REGION=$(aws configure get region)
 echo export AWS_DEFAULT_REGION=$REGION\;
-echo export AWS_SESSION_TOKEN=$(echo $CREDS | jq .Credentials.SessionToken)\l
+echo export AWS_SESSION_TOKEN=$(echo $CREDS | jq .Credentials.SessionToken)\;
 echo export AWS_ACCESS_KEY_ID=$(echo $CREDS | jq .Credentials.AccessKeyId)\;
 echo export AWS_SECRET_ACCESS_KEY=$(echo $CREDS | jq .Credentials.SecretAccessKey)\;
