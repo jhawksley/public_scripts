@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Check the current profile has an mfa_serial.
+
+if [[ $(aws configure get mfa_serial) = "" ]]; then
+    echo This profile does not support MFA access.
+    exit 2
+fi
+
+# MFA token code must be arg 1.
+if [[ $# -ne 1 ]]; then
+    echo Sole argument must be current MFA token code.
+    exit 1
+fi
+
+unset AWS_DEFAULT_REGION AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID
+
+CREDS=$(aws sts get-session-token --serial-number $(aws configure get mfa_serial) --token-code $1 --duration-seconds 129600)
+
+if [[ $? -ne 0 ]]; then
+    exit
+fi
+
+echo unset AWS_DEFAULT_REGION AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID\;
+REGION=$(aws configure get region)
+echo export AWS_DEFAULT_REGION=$REGION\;
+echo export AWS_SESSION_TOKEN=$(echo $CREDS | jq .Credentials.SessionToken)\l
+echo export AWS_ACCESS_KEY_ID=$(echo $CREDS | jq .Credentials.AccessKeyId)\;
+echo export AWS_SECRET_ACCESS_KEY=$(echo $CREDS | jq .Credentials.SecretAccessKey)\;
