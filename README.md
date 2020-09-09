@@ -1,6 +1,8 @@
 # public_scripts
 
-This folder is a little collection of scripts I've written over the years.  There is no support or guarantees with them:  you use them at your own risk.
+This folder is a little collection of scripts I've written over the years.  I'll be adding and uploading them gradually, so check back periodically to see what's new.
+
+There is no support or guarantees with them:  you use them at your own risk.
 
 They may be Bash, Ruby or Python, depending on what mood I was in that day.
 
