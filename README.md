@@ -43,6 +43,6 @@ export AWS_SECRET_ACCESS_KEY="SECRET_KEY_REDACTED"
 ```
 3. Run the code again and have the shell run the result:
 ```bash
-eval $(aws-sts CURRENT_TOKE_SERIAL)
+eval $(aws-sts CURRENT_TOKEN_SERIAL)
 ```
 
