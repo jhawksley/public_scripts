@@ -16,6 +16,13 @@ This script uses your CLI [AWS credentials](https://docs.aws.amazon.com/cli/late
 
 This is useful for those of us with Multi-Factor Authentication enabled on our accounts.  If MFA is enabled, your Access Key and Secret Key are used in conjunction with your current MFA token to generate a temporary Access Key, Secret Key and Session Token.  You can set these in the environment and then use the CLI as normal.  
 
+#### Requirements
+
+Must be in path:
+
+* jq
+* aws v3+
+
 #### Usage
 
 1. Store your MFA serial (usually of the form `arn:aws:iam::YOUR_ACCOUNT:mfa/YOUR_USERNAME`) in your current profile with:
