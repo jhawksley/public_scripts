@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+if ARGV.count == 0
+    puts 'You must supply a command to run forever'
+    exit -1
+end
+
+es = 0
+
+run = 0
+
+while es == 0 do
+    puts "===> Run #{run += 1} @ #{Time.now}"
+
+    ret = `#{ARGV.join(" ")}`
+    es = $?.exitstatus            #=> 99
+    puts ret
+end
+
+puts "\nError => #{es}"

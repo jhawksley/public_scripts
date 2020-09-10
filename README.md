@@ -18,6 +18,8 @@ This is useful for those of us with Multi-Factor Authentication enabled on our a
 
 #### Requirements
 
+Script type: bash.
+
 Must be in path:
 
 * jq
@@ -46,3 +48,17 @@ export AWS_SECRET_ACCESS_KEY="SECRET_KEY_REDACTED"
 eval $(aws-sts CURRENT_TOKEN_SERIAL)
 ```
 
+---
+
+### run-until-error
+
+Run a command line until it returns an error (nonzero) code.
+
+#### Requirements
+
+Script type: Ruby.
+
+#### Usage
+```bash
+run-until-error do_something arg1 arg2
+```
