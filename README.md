@@ -62,3 +62,18 @@ Script type: Ruby.
 ```bash
 run-until-error do_something arg1 arg2
 ```
+
+---
+
+### eachdir
+
+Run a command line in every subdirectory from the current working directory.  The command prints the directory in which it is running, followed by the output of the command.
+
+#### Requirements
+
+Script type: Ruby.
+
+#### Usage
+```bash
+eachdir git status
+```

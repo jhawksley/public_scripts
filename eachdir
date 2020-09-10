@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+#
+if ARGV.count == 0
+    puts 'You must supply a command to run in each directory.'
+    exit -1
+end
+
+Dir.new('.').each do |file|
+
+    next if file == '.' || file == '..'
+    next unless File.directory?(file)
+
+    puts "==> #{file}"
+    puts `cd "#{file}" && #{ARGV.join(' ')} && cd ..`
+    puts
+
+end
