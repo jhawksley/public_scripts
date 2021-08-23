@@ -27,6 +27,8 @@ Must be in path:
 
 #### Usage
 
+If you are using a multiprofile `~/.aws/config`, ensure you have selected the correct profile by doing `export AWS_PROFILE=my_profile_name` prior to continuing.
+
 1. Store your MFA serial (usually of the form `arn:aws:iam::YOUR_ACCOUNT:mfa/YOUR_USERNAME`) in your current profile with:
 ```bash
 aws configure set mfa_serial arn:aws:iam::YOUR_ACCOUNT:mfa/YOUR_USERNAME
