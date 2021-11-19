@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+# Encode a URL string into a raw version
+rawurlencode() 
+{
+    local string="${1}"
+    local strlen=${#string}
+    local encoded=""
+    local pos c o
+
+    for (( pos=0 ; pos<strlen ; pos++ )); do
+        c=${string:$pos:1}
+        case "$c" in
+            [-_.~a-zA-Z0-9] ) o="${c}" ;;
+            * )               printf -v o '%%%02x' "'$c"
+        esac
+        encoded+="${o}"
+    done
+    echo "${encoded}"
+}
+
+
+# Abort Normally
+abort_normal() 
+{
+    echo "Abort: ${2}" >&2
+    exit ${1}
+}
+
+
+# Abort due to internal error
+abort_internal()
+{
+    echo "Abort (Internal): ${1}" >&2
+    exit 1
+}
+
+# Assert a given command is installed and exit if not.
+assert_available()
+{
+    local command="${1}"
+
+    if [[ -z "${command}" ]]; then
+        abort_internal "You must supply a command to check for."
+    fi
+
+    if [[ ! -x "$(command -v ${command})" ]]; then
+        abort_normal 1 "The command '${command}' must be installed and in the path."
+    fi
+}
+
+
+# Assert a given environment variable exists.
+assert_environment_available()
+{
+    # local explanatory_text = ${2}:-'?'
+    if [[ -z "${!1}" ]]; then
+        abort_normal 2 "Environment variable '${1}' must be defined."
+    fi
+}
+
+
+# Assert a file can be read
+assert_file_readable()
+{
+    if [[ ! -r "${1}" ]]; then
+        abort_normal 3 "File '${1}' must exist and be readable."
+    fi
+}
+
+# Assert an argument count
+assert_argcount()
+{
+    WANTED_ARGCOUNT=$1
+    ARGCOUNT=$2
+    
+    if [[ "${WANTED_ARGCOUNT}" -ne "${ARGCOUNT}" ]]; then
+        abort_normal 4 "${3:-"No syntax available"}"
+    fi
+}
+
+assert_rvzero()
+{
+    if [[ ${1} -ne 0 ]]; then
+        abort_normal 5 "${2:-"No further explanation available (see above for details)."}"
+    fi
+}
