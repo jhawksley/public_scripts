@@ -9,10 +9,10 @@ assert_argcount 1 ${#}  "Syntax: ${0} <instance_id>"
 INSTANCE_ID=${1}
 
 assert_available ssh
-assert_available attr
+assert_available awstr
 assert_environment_available "AWS_DEFAULT_KEY"
 assert_file_readable "${AWS_DEFAULT_KEY}"
 
-PUBLIC_IP=$(attr ${INSTANCE_ID})
+PUBLIC_IP=$(awstr ${INSTANCE_ID})
 
 ssh -i ${AWS_DEFAULT_KEY} ec2-user@${PUBLIC_IP}
